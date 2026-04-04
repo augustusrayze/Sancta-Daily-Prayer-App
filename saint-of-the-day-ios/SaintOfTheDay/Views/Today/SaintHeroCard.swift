@@ -35,7 +35,7 @@ struct SaintHeroCard: View {
                 // Name and feast day
                 VStack(alignment: .leading, spacing: 4) {
                     Text(saint.canonicalName)
-                        .font(.saintTitle)
+                        .font(.saintDisplay)
                         .foregroundStyle(Color.parchment)
                         .shadow(color: .black.opacity(0.4), radius: 2, x: 0, y: 1)
 

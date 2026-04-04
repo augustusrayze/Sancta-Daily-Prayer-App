@@ -37,6 +37,17 @@
 		AA000001000000000000028 /* SaintPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000129 /* SaintPageView.swift */; };
 		AA000001000000000000029 /* FlipButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000130 /* FlipButton.swift */; };
 		AA000001000000000000030 /* PageFlipContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000131 /* PageFlipContainer.swift */; };
+		AA000001000000000000031 /* DailyReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000132 /* DailyReading.swift */; };
+		AA000001000000000000032 /* LiturgicalDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000133 /* LiturgicalDay.swift */; };
+		AA000001000000000000033 /* DailyPrayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000134 /* DailyPrayer.swift */; };
+		AA000001000000000000034 /* prayers.json in Resources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000135 /* prayers.json */; };
+		AA000001000000000000035 /* ReadingsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000136 /* ReadingsService.swift */; };
+		AA000001000000000000036 /* LiturgicalCalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000137 /* LiturgicalCalendarService.swift */; };
+		AA000001000000000000037 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000138 /* MenuButton.swift */; };
+		AA000001000000000000038 /* MenuSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000139 /* MenuSheet.swift */; };
+		AA000001000000000000039 /* DailyPrayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000140 /* DailyPrayerView.swift */; };
+		AA000001000000000000040 /* DailyReadingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000141 /* DailyReadingsView.swift */; };
+		AA000001000000000000041 /* LiturgicalCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000142 /* LiturgicalCalendarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +83,17 @@
 		AA000001000000000000129 /* SaintPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaintPageView.swift; sourceTree = "<group>"; };
 		AA000001000000000000130 /* FlipButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlipButton.swift; sourceTree = "<group>"; };
 		AA000001000000000000131 /* PageFlipContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageFlipContainer.swift; sourceTree = "<group>"; };
+		AA000001000000000000132 /* DailyReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReading.swift; sourceTree = "<group>"; };
+		AA000001000000000000133 /* LiturgicalDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiturgicalDay.swift; sourceTree = "<group>"; };
+		AA000001000000000000134 /* DailyPrayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPrayer.swift; sourceTree = "<group>"; };
+		AA000001000000000000135 /* prayers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = prayers.json; sourceTree = "<group>"; };
+		AA000001000000000000136 /* ReadingsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingsService.swift; sourceTree = "<group>"; };
+		AA000001000000000000137 /* LiturgicalCalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiturgicalCalendarService.swift; sourceTree = "<group>"; };
+		AA000001000000000000138 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
+		AA000001000000000000139 /* MenuSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSheet.swift; sourceTree = "<group>"; };
+		AA000001000000000000140 /* DailyPrayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPrayerView.swift; sourceTree = "<group>"; };
+		AA000001000000000000141 /* DailyReadingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReadingsView.swift; sourceTree = "<group>"; };
+		AA000001000000000000142 /* LiturgicalCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiturgicalCalendarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +126,7 @@
 				AA000001000000000000313 /* ViewModels */,
 				AA000001000000000000314 /* Views */,
 				AA000001000000000000315 /* Extensions */,
+				AA000001000000000000331 /* Resources */,
 			);
 			path = SaintOfTheDay;
 			sourceTree = "<group>";
@@ -113,6 +136,9 @@
 			children = (
 				AA000001000000000000102 /* Saint.swift */,
 				AA000001000000000000103 /* SaintSection.swift */,
+				AA000001000000000000132 /* DailyReading.swift */,
+				AA000001000000000000133 /* LiturgicalDay.swift */,
+				AA000001000000000000134 /* DailyPrayer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -125,6 +151,8 @@
 				AA000001000000000000106 /* SaintRepository.swift */,
 				AA000001000000000000107 /* CacheService.swift */,
 				AA000001000000000000108 /* NotificationService.swift */,
+				AA000001000000000000136 /* ReadingsService.swift */,
+				AA000001000000000000137 /* LiturgicalCalendarService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -147,6 +175,7 @@
 				AA000001000000000000318 /* Onboarding */,
 				AA000001000000000000319 /* Settings */,
 				AA000001000000000000330 /* Shared */,
+				AA000001000000000000332 /* Menu */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -209,6 +238,26 @@
 				AA000001000000000000126 /* View+CardStyle.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AA000001000000000000331 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AA000001000000000000135 /* prayers.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AA000001000000000000332 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				AA000001000000000000138 /* MenuButton.swift */,
+				AA000001000000000000139 /* MenuSheet.swift */,
+				AA000001000000000000140 /* DailyPrayerView.swift */,
+				AA000001000000000000141 /* DailyReadingsView.swift */,
+				AA000001000000000000142 /* LiturgicalCalendarView.swift */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		AA000001000000000000320 /* Products */ = {
@@ -278,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA000001000000000000027 /* Assets.xcassets in Resources */,
+				AA000001000000000000034 /* prayers.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +367,16 @@
 				AA000001000000000000028 /* SaintPageView.swift in Sources */,
 				AA000001000000000000029 /* FlipButton.swift in Sources */,
 				AA000001000000000000030 /* PageFlipContainer.swift in Sources */,
+				AA000001000000000000031 /* DailyReading.swift in Sources */,
+				AA000001000000000000032 /* LiturgicalDay.swift in Sources */,
+				AA000001000000000000033 /* DailyPrayer.swift in Sources */,
+				AA000001000000000000035 /* ReadingsService.swift in Sources */,
+				AA000001000000000000036 /* LiturgicalCalendarService.swift in Sources */,
+				AA000001000000000000037 /* MenuButton.swift in Sources */,
+				AA000001000000000000038 /* MenuSheet.swift in Sources */,
+				AA000001000000000000039 /* DailyPrayerView.swift in Sources */,
+				AA000001000000000000040 /* DailyReadingsView.swift in Sources */,
+				AA000001000000000000041 /* LiturgicalCalendarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

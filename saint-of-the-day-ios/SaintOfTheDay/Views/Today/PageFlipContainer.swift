@@ -6,13 +6,14 @@ struct PageFlipContainer: View {
     // Drives the entire animation 0.0 → 1.0 each flip
     @State private var flipProgress: Double = 0.0
     @State private var isAnimating: Bool = false
+    @State private var showMenu: Bool = false
 
     // Independent navigation paths for each page
     @State private var todayPath = NavigationPath()
     @State private var yesterdayPath = NavigationPath()
 
     var body: some View {
-        ZStack(alignment: .bottomLeading) {
+        ZStack(alignment: .bottom) {
             // MARK: Yesterday (bottom layer)
             yesterdayLayer
                 .rotation3DEffect(
@@ -41,17 +42,36 @@ struct PageFlipContainer: View {
                 )
                 .allowsHitTesting(!viewModel.isShowingYesterday && !isAnimating)
 
-            // MARK: Glass flip button
-            FlipButton(
-                isShowingYesterday: viewModel.isShowingYesterday,
-                isLoading: viewModel.isYesterdayLoading && viewModel.isShowingYesterday
-            ) {
-                performFlip()
+            // MARK: Bottom button row
+            HStack {
+                // Glass flip button — bottom-left
+                FlipButton(
+                    isShowingYesterday: viewModel.isShowingYesterday,
+                    isLoading: viewModel.isYesterdayLoading && viewModel.isShowingYesterday
+                ) {
+                    performFlip()
+                }
+
+                Spacer()
+
+                // Glass menu button — bottom-right
+                MenuButton {
+                    showMenu = true
+                }
             }
-            .padding(.leading, 20)
+            .padding(.horizontal, 20)
             .padding(.bottom, 36)
         }
         .background(Color.parchment.ignoresSafeArea())
+        .sheet(isPresented: $showMenu) {
+            MenuSheet(saint: currentSaint)
+        }
+    }
+
+    // MARK: - Current Saint (for Share)
+
+    private var currentSaint: Saint? {
+        viewModel.isShowingYesterday ? viewModel.yesterdaySaint : viewModel.todaySaint
     }
 
     // MARK: - Page Layers
