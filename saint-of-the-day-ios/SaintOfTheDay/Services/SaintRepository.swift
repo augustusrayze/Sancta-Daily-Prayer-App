@@ -40,6 +40,10 @@ final class SaintRepository {
             let saint = try await wikipediaService.fetchSaint(named: name, for: date)
             try? cacheService.save(saint, for: date)
             state = .loaded(saint)
+            // Update notification with saint image when today's saint loads
+            if Calendar.current.isDateInToday(date), let imageURL = saint.imageURL {
+                Task { await NotificationService.shared.updateNotificationImage(from: imageURL) }
+            }
         } catch {
             if let stale = try? cacheService.load(for: date) {
                 state = .loaded(stale)

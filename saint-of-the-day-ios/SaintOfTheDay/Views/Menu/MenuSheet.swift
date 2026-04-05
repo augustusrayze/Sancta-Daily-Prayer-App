@@ -63,8 +63,24 @@ struct MenuSheet: View {
                     GoldDivider()
 
                     // Share row
-                    if let saint {
-                        ShareLink(item: shareText(for: saint)) {
+                    if let saint, let shareImage = renderedShareCard(for: saint) {
+                        ShareLink(
+                            item: shareImage,
+                            preview: SharePreview(saint.canonicalName, image: shareImage)
+                        ) {
+                            MenuRow(
+                                icon: "square.and.arrow.up",
+                                label: "Share Today's Saint",
+                                color: Color.inkBrown,
+                                showChevron: false
+                            )
+                        }
+                        .buttonStyle(.plain)
+
+                        GoldDivider()
+                    } else if saint != nil {
+                        // Fallback to text share if rendering fails
+                        ShareLink(item: shareText(for: saint!)) {
                             MenuRow(
                                 icon: "square.and.arrow.up",
                                 label: "Share Today's Saint",
@@ -102,6 +118,15 @@ struct MenuSheet: View {
         .presentationDetents([.medium, .large])
         .presentationDragIndicator(.visible)
         .presentationBackground(Color.parchment)
+    }
+
+    @MainActor
+    private func renderedShareCard(for saint: Saint) -> Image? {
+        let card = SaintShareCard(saint: saint).frame(width: 390, height: 520)
+        let renderer = ImageRenderer(content: card)
+        renderer.scale = 3.0
+        guard let uiImage = renderer.uiImage else { return nil }
+        return Image(uiImage: uiImage)
     }
 
     private func shareText(for saint: Saint) -> String {

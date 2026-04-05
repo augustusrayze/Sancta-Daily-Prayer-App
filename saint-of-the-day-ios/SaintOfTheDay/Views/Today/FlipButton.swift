@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct FlipButton: View {
     let isShowingYesterday: Bool
@@ -10,7 +11,10 @@ struct FlipButton: View {
     }
 
     var body: some View {
-        Button(action: action) {
+        Button {
+            UISelectionFeedbackGenerator().selectionChanged()
+            action()
+        } label: {
             ZStack {
                 Circle()
                     .fill(.ultraThinMaterial)

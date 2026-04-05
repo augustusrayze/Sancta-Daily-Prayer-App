@@ -1,10 +1,14 @@
 import SwiftUI
+import UIKit
 
 struct MenuButton: View {
     let action: () -> Void
 
     var body: some View {
-        Button(action: action) {
+        Button {
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            action()
+        } label: {
             ZStack {
                 Circle()
                     .fill(.ultraThinMaterial)

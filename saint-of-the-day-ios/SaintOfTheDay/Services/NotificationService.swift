@@ -24,30 +24,35 @@ final class NotificationService {
     func rescheduleIfNeeded() async {
         guard await isPermissionGranted() else { return }
         guard !(await isAlreadyScheduled()) else { return }
-        await scheduleDailyNotification()
+        await scheduleDailyNotification(imageURL: nil)
     }
 
-    func scheduleDailyNotification() async {
+    func scheduleDailyNotification(imageURL: URL?) async {
         let content = UNMutableNotificationContent()
         content.title = "Saint of the Day"
         content.body = "Open the app to meet today's featured saint."
         content.sound = .default
         content.badge = 1
 
+        // Attach saint image if available
+        if let imageURL {
+            content.attachments = (try? await makeAttachment(from: imageURL)).map { [$0] } ?? []
+        }
+
         var components = DateComponents()
         components.hour = 8
         components.minute = 0
 
-        let trigger = UNCalendarNotificationTrigger(
-            dateMatching: components,
-            repeats: true
-        )
-        let request = UNNotificationRequest(
-            identifier: notificationID,
-            content: content,
-            trigger: trigger
-        )
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+        let request = UNNotificationRequest(identifier: notificationID, content: content, trigger: trigger)
         try? await center.add(request)
+    }
+
+    /// Called after today's saint loads — cancels existing notification and reschedules with image.
+    func updateNotificationImage(from imageURL: URL) async {
+        guard await isPermissionGranted() else { return }
+        center.removePendingNotificationRequests(withIdentifiers: [notificationID])
+        await scheduleDailyNotification(imageURL: imageURL)
     }
 
     func clearBadge() {
@@ -55,6 +60,14 @@ final class NotificationService {
     }
 
     // MARK: - Private
+
+    private func makeAttachment(from url: URL) async throws -> UNNotificationAttachment {
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let tmpURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent("saint-notif-image.jpg")
+        try data.write(to: tmpURL, options: .atomic)
+        return try UNNotificationAttachment(identifier: "saint-image", url: tmpURL, options: nil)
+    }
 
     private func isPermissionGranted() async -> Bool {
         let settings = await center.notificationSettings()

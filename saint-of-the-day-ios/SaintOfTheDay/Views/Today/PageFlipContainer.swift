@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct PageFlipContainer: View {
     @Bindable var viewModel: TodayViewModel
@@ -7,6 +8,9 @@ struct PageFlipContainer: View {
     @State private var flipProgress: Double = 0.0
     @State private var isAnimating: Bool = false
     @State private var showMenu: Bool = false
+
+    // Swipe gesture state
+    @State private var dragHapticFired: Bool = false
 
     // Independent navigation paths for each page
     @State private var todayPath = NavigationPath()
@@ -44,7 +48,6 @@ struct PageFlipContainer: View {
 
             // MARK: Bottom button row
             HStack {
-                // Glass flip button — bottom-left
                 FlipButton(
                     isShowingYesterday: viewModel.isShowingYesterday,
                     isLoading: viewModel.isYesterdayLoading && viewModel.isShowingYesterday
@@ -54,7 +57,6 @@ struct PageFlipContainer: View {
 
                 Spacer()
 
-                // Glass menu button — bottom-right
                 MenuButton {
                     showMenu = true
                 }
@@ -63,6 +65,7 @@ struct PageFlipContainer: View {
             .padding(.bottom, 36)
         }
         .background(Color.parchment.ignoresSafeArea())
+        .gesture(swipeGesture)
         .sheet(isPresented: $showMenu) {
             MenuSheet(saint: currentSaint)
         }
@@ -82,7 +85,7 @@ struct PageFlipContainer: View {
             ZStack {
                 Color.parchment.ignoresSafeArea()
                 if viewModel.isTodayLoading {
-                    LoadingView()
+                    SaintPageSkeleton()
                 } else if let error = viewModel.todayError {
                     ErrorView(message: error) {
                         Task { await viewModel.refreshToday() }
@@ -112,7 +115,7 @@ struct PageFlipContainer: View {
             ZStack {
                 Color.parchment.ignoresSafeArea()
                 if viewModel.isYesterdayLoading {
-                    LoadingView()
+                    SaintPageSkeleton()
                 } else if let error = viewModel.yesterdayError {
                     ErrorView(message: error) {
                         Task { await viewModel.retryYesterday() }
@@ -125,7 +128,6 @@ struct PageFlipContainer: View {
                         onRefresh: { await viewModel.retryYesterday() }
                     )
                 } else {
-                    // Idle — blank parchment until first flip
                     Color.parchment.ignoresSafeArea()
                 }
             }
@@ -141,8 +143,6 @@ struct PageFlipContainer: View {
 
     // MARK: - Animation Math
 
-    // Today: rotates 0° → -90° while progress goes 0 → 0.5 (flipping to yesterday)
-    //        rotates -90° → 0° while progress goes 0 → 0.5 (flipping back to today)
     private var todayRotation: Double {
         let half = min(flipProgress * 2.0, 1.0)
         return viewModel.isShowingYesterday
@@ -150,8 +150,6 @@ struct PageFlipContainer: View {
             : -90.0 * (1.0 - half)
     }
 
-    // Yesterday: rotates 90° → 0° while progress goes 0.5 → 1 (arriving)
-    //            rotates 0° → 90° while progress goes 0 → 0.5 (departing)
     private var yesterdayRotation: Double {
         let half = max((flipProgress - 0.5) * 2.0, 0.0)
         return viewModel.isShowingYesterday
@@ -159,18 +157,54 @@ struct PageFlipContainer: View {
             : 90.0 * half
     }
 
-    // Shadow peaks at midpoint (sin curve: 0 → 1 → 0)
     private var midpointShadow: Double {
         sin(flipProgress * .pi) * 0.35
     }
 
-    // MARK: - Flip Action
+    // MARK: - Swipe Gesture
+
+    private var swipeGesture: some Gesture {
+        DragGesture(minimumDistance: 30)
+            .onChanged { value in
+                guard !isAnimating else { return }
+                let width = UIScreen.main.bounds.width
+                let raw = viewModel.isShowingYesterday
+                    ? value.translation.x / width      // right drag → back to today
+                    : -value.translation.x / width     // left drag → reveal yesterday
+                let clamped = max(0, min(0.85, raw))
+                flipProgress = clamped
+
+                // Kick off lazy load early when user starts dragging toward yesterday
+                if !viewModel.isShowingYesterday && clamped > 0.05 {
+                    Task { await viewModel.loadYesterdayIfNeeded() }
+                }
+
+                // Haptic at midpoint crossing
+                if clamped >= 0.5 && !dragHapticFired {
+                    dragHapticFired = true
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                } else if clamped < 0.5 {
+                    dragHapticFired = false
+                }
+            }
+            .onEnded { _ in
+                guard !isAnimating else { return }
+                if flipProgress >= 0.3 {
+                    completeFlip(duration: 0.35)
+                } else {
+                    withAnimation(.spring(duration: 0.3, bounce: 0.25)) {
+                        flipProgress = 0.0
+                    }
+                    dragHapticFired = false
+                }
+            }
+    }
+
+    // MARK: - Flip Actions
 
     private func performFlip() {
         guard !isAnimating else { return }
-        isAnimating = true
 
-        // Kick off lazy load immediately so it arrives during or shortly after the animation
         if !viewModel.isShowingYesterday {
             Task { await viewModel.loadYesterdayIfNeeded() }
         }
@@ -179,12 +213,29 @@ struct PageFlipContainer: View {
             flipProgress = 1.0
         }
 
-        // After animation: toggle state and reset progress (no animation on reset)
+        // Haptic at midpoint
         Task {
-            try? await Task.sleep(for: .seconds(0.65))
+            try? await Task.sleep(for: .seconds(0.3))
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        }
+
+        completeFlip(duration: 0.65)
+    }
+
+    private func completeFlip(duration: Double) {
+        isAnimating = true
+        if duration < 0.6 {
+            // Came from swipe — animate remainder
+            withAnimation(.timingCurve(0.4, 0.0, 0.2, 1.0, duration: duration)) {
+                flipProgress = 1.0
+            }
+        }
+        Task {
+            try? await Task.sleep(for: .seconds(duration + 0.05))
             viewModel.isShowingYesterday.toggle()
             flipProgress = 0.0
             isAnimating = false
+            dragHapticFired = false
         }
     }
 }

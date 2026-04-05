@@ -13,9 +13,11 @@ struct SaintPageView: View {
                     SaintHeroCard(saint: saint)
                         .frame(height: UIScreen.main.bounds.height * 0.45)
                         .padding(.horizontal, 16)
+                        .revealOnAppear()
 
                     QuickBioSnippet(saint: saint)
                         .padding(.horizontal, 16)
+                        .revealOnAppear(delay: 0.10)
 
                     Button {
                         navigationPath.append(saint)
@@ -32,7 +34,8 @@ struct SaintPageView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
                     .padding(.horizontal, 16)
-                    .padding(.bottom, 80) // extra padding so content isn't hidden behind flip button
+                    .padding(.bottom, 80)
+                    .revealOnAppear(delay: 0.18)
                 }
                 .padding(.top, 8)
             }

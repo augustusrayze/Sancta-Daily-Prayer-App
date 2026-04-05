@@ -48,6 +48,9 @@
 		AA000001000000000000039 /* DailyPrayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000140 /* DailyPrayerView.swift */; };
 		AA000001000000000000040 /* DailyReadingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000141 /* DailyReadingsView.swift */; };
 		AA000001000000000000041 /* LiturgicalCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000142 /* LiturgicalCalendarView.swift */; };
+		AA000001000000000000042 /* ShimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000143 /* ShimmerView.swift */; };
+		AA000001000000000000043 /* SaintShareCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000144 /* SaintShareCard.swift */; };
+		AA000001000000000000044 /* View+RevealOnAppear.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000145 /* View+RevealOnAppear.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +97,9 @@
 		AA000001000000000000140 /* DailyPrayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPrayerView.swift; sourceTree = "<group>"; };
 		AA000001000000000000141 /* DailyReadingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyReadingsView.swift; sourceTree = "<group>"; };
 		AA000001000000000000142 /* LiturgicalCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiturgicalCalendarView.swift; sourceTree = "<group>"; };
+		AA000001000000000000143 /* ShimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerView.swift; sourceTree = "<group>"; };
+		AA000001000000000000144 /* SaintShareCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaintShareCard.swift; sourceTree = "<group>"; };
+		AA000001000000000000145 /* View+RevealOnAppear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+RevealOnAppear.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +232,8 @@
 				AA000001000000000000121 /* GoldDivider.swift */,
 				AA000001000000000000122 /* LoadingView.swift */,
 				AA000001000000000000123 /* ErrorView.swift */,
+				AA000001000000000000143 /* ShimmerView.swift */,
+				AA000001000000000000144 /* SaintShareCard.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -236,6 +244,7 @@
 				AA000001000000000000124 /* Color+Theme.swift */,
 				AA000001000000000000125 /* Font+Theme.swift */,
 				AA000001000000000000126 /* View+CardStyle.swift */,
+				AA000001000000000000145 /* View+RevealOnAppear.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -377,6 +386,9 @@
 				AA000001000000000000039 /* DailyPrayerView.swift in Sources */,
 				AA000001000000000000040 /* DailyReadingsView.swift in Sources */,
 				AA000001000000000000041 /* LiturgicalCalendarView.swift in Sources */,
+				AA000001000000000000042 /* ShimmerView.swift in Sources */,
+				AA000001000000000000043 /* SaintShareCard.swift in Sources */,
+				AA000001000000000000044 /* View+RevealOnAppear.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

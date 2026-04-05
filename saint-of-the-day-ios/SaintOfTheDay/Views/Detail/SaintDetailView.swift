@@ -16,6 +16,7 @@ struct SaintDetailView: View {
                 // Hero image
                 SaintImageView(imageURL: saint.imageURL, name: saint.canonicalName)
                     .padding(.top, 8)
+                    .revealOnAppear()
 
                 // Name and period header
                 VStack(spacing: 6) {
@@ -35,14 +36,18 @@ struct SaintDetailView: View {
                     }
                 }
                 .padding(.horizontal, 16)
+                .revealOnAppear(delay: 0.06)
 
                 GoldDivider()
                     .padding(.horizontal, 16)
+                    .revealOnAppear(delay: 0.10)
 
-                // Content sections
-                ForEach(saint.sections.filter { !$0.body.isEmpty }) { section in
+                // Content sections — staggered reveal
+                let sections = saint.sections.filter { !$0.body.isEmpty }
+                ForEach(Array(sections.enumerated()), id: \.element.id) { index, section in
                     SaintSectionView(section: section)
                         .padding(.horizontal, 16)
+                        .revealOnAppear(delay: 0.14 + Double(index) * 0.07)
                 }
 
                 // Wikipedia attribution (required by CC BY-SA 4.0)
@@ -61,6 +66,7 @@ struct SaintDetailView: View {
                     }
                     .padding(.horizontal, 16)
                     .padding(.bottom, 32)
+                    .revealOnAppear(delay: 0.14 + Double(sections.count) * 0.07)
                 }
             }
         }
