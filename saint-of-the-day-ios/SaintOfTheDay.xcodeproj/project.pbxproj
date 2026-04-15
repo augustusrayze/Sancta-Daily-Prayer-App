@@ -53,6 +53,7 @@
 		AA000001000000000000044 /* View+RevealOnAppear.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000145 /* View+RevealOnAppear.swift */; };
 		AA000001000000000000045 /* AppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000146 /* AppIconView.swift */; };
 		AA000001000000000000046 /* AppIconExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000147 /* AppIconExporter.swift */; };
+		AA000001000000000000047 /* DatePickerOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000001000000000000149 /* DatePickerOverlay.swift */; };
 		B1090BE42F86C42B00672177 /* SaintQuoteCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1090BE32F86C42B00672177 /* SaintQuoteCard.swift */; };
 		B1090BE72F86D91A00672177 /* SavedSaintsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1090BE62F86D91A00672177 /* SavedSaintsStore.swift */; };
 		B1090BE92F86D91A00672177 /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1090BE82F86D91A00672177 /* SavedView.swift */; };
@@ -124,6 +125,7 @@
 		AA000001000000000000146 /* AppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconView.swift; sourceTree = "<group>"; };
 		AA000001000000000000147 /* AppIconExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconExporter.swift; sourceTree = "<group>"; };
 		AA000001000000000000148 /* SaintOfTheDay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SaintOfTheDay.entitlements; sourceTree = "<group>"; };
+		AA000001000000000000149 /* DatePickerOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerOverlay.swift; sourceTree = "<group>"; };
 		B1090BE32F86C42B00672177 /* SaintQuoteCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaintQuoteCard.swift; sourceTree = "<group>"; };
 		B1090BE62F86D91A00672177 /* SavedSaintsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedSaintsStore.swift; sourceTree = "<group>"; };
 		B1090BE82F86D91A00672177 /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				AA000001000000000000123 /* ErrorView.swift */,
 				AA000001000000000000143 /* ShimmerView.swift */,
 				AA000001000000000000144 /* SaintShareCard.swift */,
+				AA000001000000000000149 /* DatePickerOverlay.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				B1090BEB2F86E64900672177 /* AppRouter.swift in Sources */,
 				AA000001000000000000045 /* AppIconView.swift in Sources */,
 				AA000001000000000000046 /* AppIconExporter.swift in Sources */,
+				AA000001000000000000047 /* DatePickerOverlay.swift in Sources */,
 				B1090BE92F86D91A00672177 /* SavedView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
